@@ -9,10 +9,11 @@ exports.up = function(knex) {
     tbl.string("make");
     tbl.string("model");
     tbl.integer("mileage");
+    tbl.string("title");
   });
 };
 
 exports.down = function(knex) {
   // to undo the schema
-  return knex.dropTableIfExists("cars");
+  return knex.schema.dropTableIfExists("cars");
 };
