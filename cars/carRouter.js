@@ -61,4 +61,23 @@ router.put("/:id", (req, res) => {
       res.status(500).json({ error: "can't update car" });
     });
 });
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  cars
+    .remove(id)
+    .then(deleted => {
+      console.log(deleted);
+      if (deleted) {
+        res.send("Car successfully deleted");
+        res.status(204).end();
+      } else {
+        res.status(404).json({ error: "car with id does not exist" });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: `a server error occurred` });
+    });
+});
 module.exports = router;
